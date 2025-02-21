@@ -1,22 +1,15 @@
-
-
-import Navbar from "../components/Navbar";
+import InstructionCard from "../components/InstructionCard ";
 import StartBtn from "../components/StartBtn";
-import { useNavigate } from "react-router-dom";
-
-
+import { Instructions } from "../utils/constants";
 
 const Home = () => {
 
-  const navigate = useNavigate()
-
-
-  return (
-    <div className="flex flex-col gap-4 ">
-      <Navbar />
-      <StartBtn />
-    </div>
-  )
+    return (
+        <div className="flex flex-col items-center justify-center min-h-[100vh]">
+            <StartBtn />
+            <InstructionCard instructions={Instructions} />
+        </div>
+    )
 }
 
 export default Home;
