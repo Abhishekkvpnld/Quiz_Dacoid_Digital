@@ -1,13 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
-
+import { useEffect, useState } from "react";
+import Confetti from "react-confetti";
 
 
 const Status = () => {
 
     const navigate = useNavigate();
     const { username, answers } = useSelector((state) => state.quiz);
+    const [showConfetti, setShowConfetti] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setShowConfetti(false), 5000);
+        return () => {
+            clearTimeout(timer);
+        };
+    }, []);
+
 
 
     if (!username) {
@@ -27,6 +37,8 @@ const Status = () => {
     return (
         <div className="transition-all flex flex-col items-center w-[100vw] min-h-[100vh] bg-gray-100">
             <Navbar />
+
+            {showConfetti && <Confetti numberOfPieces={500} />}
 
             <div className="bg-white p-6 min-w-[50%] min-h-[50%] mt-5 rounded-xl shadow-lg">
                 <h1 className="text-2xl font-bold text-center text-green-600">Quiz Completed 🎉</h1>

@@ -21,18 +21,14 @@ const CountdownTimer = ({ onTimeUp, handleSubmit, questionTimer, setQuestionTime
   }, [timeLeft, navigate]);
 
 
-
-
   useEffect(() => {
     if (questionTimer === 0) {
       onTimeUp();
       setQuestionTimer(30);
     }
-
     const questionInterval = setInterval(() => {
       setQuestionTimer((prev) => prev - 1);
     }, 1000);
-
 
     return () => clearInterval(questionInterval);
   }, [questionTimer, onTimeUp]);

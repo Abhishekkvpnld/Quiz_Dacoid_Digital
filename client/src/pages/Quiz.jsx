@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
 import { setAnswers } from "../redux/quizSlice";
+import { addQuizResult } from "../utils/indexedDB";
 
 
 
@@ -89,8 +90,9 @@ const Quiz = () => {
             wrongAnswers: answersArray.filter((ans) => !ans.isCorrect).length,
             attemptedQuestions: answersArray.length,
             answers: answersArray,
+            date: new Date().toISOString()
         };
-
+        await addQuizResult(quizResult)
         dispatch(setAnswers(quizResult));
         navigate("/finished")
         toast.success("Quiz Submitted Successfully!");
@@ -110,7 +112,7 @@ const Quiz = () => {
         <div className="flex flex-col items-center w-full min-h-screen bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 animate-gradient-x">
             <Navbar />
 
-            <div className="w-full px-10 flex items-center justify-between mt-4">
+            <div className="w-full px-10 flex items-center justify-between mt-1">
                 <button
                     onClick={() => navigate("/")}
                     className="px-4 text-sm md:text-lg py-1 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
@@ -126,7 +128,7 @@ const Quiz = () => {
 
 
 
-            <div className="bg-white p-5 min-w-[50%] min-h-[50%] mt-5 rounded-xl shadow-lg">
+            <div className="bg-white p-5 min-w-[50%] animate-slideUp min-h-[50%] mt-5 rounded-xl shadow-lg mb-5">
                 {quizData.length > 0 ? (
                     <>
                         <div className="flex items-center justify-between my-2">
@@ -148,7 +150,7 @@ const Quiz = () => {
                                     <button
                                         disabled={isComplete}
                                         key={i}
-                                        className={`${isComplete && "cursor-not-allowed"} border rounded-md p-2 transition-all ${selectedOption === option
+                                        className={`animate-slideUp ${isComplete && "cursor-not-allowed"} border rounded-md p-2 transition-all ${selectedOption === option
                                             ? "bg-blue-500 text-white"
                                             : "bg-gray-100 hover:bg-gray-200"
                                             }`}
