@@ -22,7 +22,7 @@ const Quiz = () => {
     const [answersArray, setAnswersArray] = useState([]);
     const [isComplete, setIsComplete] = useState(false);
     const [score, setScore] = useState(0);
-    const [questionTimer, setQuestionTimer] = useState(30);
+    const [questionTimer, setQuestionTimer] = useState(120);
 
 
 

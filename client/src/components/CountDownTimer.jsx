@@ -24,7 +24,7 @@ const CountdownTimer = ({ onTimeUp, handleSubmit, questionTimer, setQuestionTime
   useEffect(() => {
     if (questionTimer === 0) {
       onTimeUp();
-      setQuestionTimer(30);
+      setQuestionTimer(180);
     }
     const questionInterval = setInterval(() => {
       setQuestionTimer((prev) => prev - 1);
